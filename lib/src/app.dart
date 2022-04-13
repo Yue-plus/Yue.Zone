@@ -15,16 +15,12 @@ class YueZoneApp extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.settings),
             tooltip: '设置',
-            onPressed: () {
-              Navigator.pushNamed(context, '/settings');
-            },
+            onPressed: () => Navigator.pushNamed(context, '/settings'),
           ),
           IconButton(
             icon: const Icon(Icons.login),
             tooltip: '登入',
-            onPressed: () {
-              Navigator.pushNamed(context, '/login');
-            },
+            onPressed: () => Navigator.pushNamed(context, '/login'),
           ),
         ],
       ),
