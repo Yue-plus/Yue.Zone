@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:yue_zone/src/login/login_view.dart';
-import 'package:yue_zone/src/setting/setting_view.dart';
+import 'package:yue_zone/src/setting/settings_controller.dart';
+import 'package:yue_zone/src/setting/settings_view.dart';
 
 class YueZoneApp extends StatelessWidget {
-  const YueZoneApp({Key? key}) : super(key: key);
+  const YueZoneApp({Key? key, required this.settingsController})
+      : super(key: key);
+
+  final SettingsController settingsController;
 
   static const title = 'YueZone - 悦域';
 
@@ -32,16 +36,28 @@ class YueZoneApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: title,
-      theme: ThemeData.dark(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => _home(context),
-        '/settings': (context) => const SettingsView(),
-        '/login': (context) => const LoginView(),
+    // 将 [SettingsController] 连接到 [MaterialApp]。
+    //
+    // [AnimatedBuilder] Widget 监听 [SettingsController] 的变化。
+    // 每当用户更新设置时，都会重新构建 [MaterialApp]。
+    return AnimatedBuilder(
+      animation: settingsController,
+      builder: (BuildContext context, Widget? child) {
+        return MaterialApp(
+          title: title,
+          theme: ThemeData(),
+          darkTheme: ThemeData.dark(),
+          themeMode: settingsController.themeMode,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => _home(context),
+            '/settings': (context) =>
+                SettingsView(controller: settingsController),
+            '/login': (context) => const LoginView(),
+          },
+          debugShowCheckedModeBanner: false,
+        );
       },
-      debugShowCheckedModeBanner: false,
     );
   }
 }

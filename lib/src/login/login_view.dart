@@ -14,7 +14,7 @@ class LoginView extends StatelessWidget {
         body: const Center(
           child: SizedBox(
             width: 600,
-            child: Text('登入', style: TextStyle(fontSize: 32)),
+            child: Text('// TODO 登入……', style: TextStyle(fontSize: 32)),
           ),
         )
     );
