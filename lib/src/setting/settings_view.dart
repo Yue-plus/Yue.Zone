@@ -53,7 +53,7 @@ class SettingsView extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.color_lens),
               title: const Text('主题'),
-              subtitle: const Text('暗色'),
+              subtitle: Text(controller.themeMode.toString()),
               trailing: const Icon(Icons.arrow_right),
               onTap: () => _configThemeSimpleDialog(context),
             ),
