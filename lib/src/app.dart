@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:yue_zone/src/login/login_view.dart';
 import 'package:yue_zone/src/setting/settings_controller.dart';
 import 'package:yue_zone/src/setting/settings_view.dart';
@@ -45,6 +46,8 @@ class YueZoneApp extends StatelessWidget {
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+          // 用于在用户离开或在后台被杀死后，再返回应用时恢复路由堆栈。
+          restorationScopeId: 'YueZoneApp',
           title: title,
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
@@ -57,6 +60,14 @@ class YueZoneApp extends StatelessWidget {
             '/login': (context) => const LoginView(),
             '/signup': (context) => const SignupView(),
           },
+          localizationsDelegates: const [
+            // 本地化的代理类
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            // 本应用并不使用 Cupertino 设计
+            // GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('zh')],
           debugShowCheckedModeBanner: false,
         );
       },
