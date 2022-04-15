@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yue_zone/src/login/login_view.dart';
 import 'package:yue_zone/src/setting/settings_controller.dart';
 import 'package:yue_zone/src/setting/settings_view.dart';
+import 'package:yue_zone/src/signup/signup_view.dart';
 
 class YueZoneApp extends StatelessWidget {
   const YueZoneApp({Key? key, required this.settingsController})
@@ -54,6 +55,7 @@ class YueZoneApp extends StatelessWidget {
             '/settings': (context) =>
                 SettingsView(controller: settingsController),
             '/login': (context) => const LoginView(),
+            '/signup': (context) => const SignupView(),
           },
           debugShowCheckedModeBanner: false,
         );
