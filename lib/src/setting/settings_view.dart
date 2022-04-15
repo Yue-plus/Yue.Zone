@@ -9,7 +9,7 @@ class SettingsView extends StatelessWidget {
   final SettingsController controller;
 
   /// 主题配置弹出菜单
-  _configThemeSimpleDialog(BuildContext context) {
+  Future<void> _configThemeSimpleDialog(BuildContext context) {
     return showDialog(
       context: context,
       builder: (BuildContext context) => SimpleDialog(
@@ -41,6 +41,31 @@ class SettingsView extends StatelessWidget {
     );
   }
 
+  /// 语言配置弹出菜单
+  Future<void> _configLanguageSimpleDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => SimpleDialog(
+        title: const Text('设置语言'),
+        children: [
+          SimpleDialogOption(
+            child: const Text('简体中文'),
+            onPressed: () => Navigator.pop(context, 1),
+          ),
+          const SimpleDialogOption(
+            child: Text('繁體中文'),
+          ),
+          const SimpleDialogOption(
+            child: Text('English'),
+          ),
+          const SimpleDialogOption(
+            child: Text('日本語'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +81,13 @@ class SettingsView extends StatelessWidget {
               subtitle: Text(controller.themeMode.toString()),
               trailing: const Icon(Icons.arrow_right),
               onTap: () => _configThemeSimpleDialog(context),
+            ),
+            ListTile(
+              leading: const Icon(Icons.language),
+              title: const Text('语言'),
+              subtitle: const Text('简体中文'),
+              trailing: const Icon(Icons.arrow_right),
+              onTap: () => _configLanguageSimpleDialog(context),
             ),
             ListTile(
               leading: const Icon(Icons.account_circle),
