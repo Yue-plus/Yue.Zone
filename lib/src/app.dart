@@ -29,7 +29,7 @@ class YueZoneApp extends StatelessWidget {
         ],
       ),
       body: const Center(
-        child: Text('正在生成世界……', style: TextStyle(fontSize: 32)),
+        child: Text('// TODO 生成世界……', style: TextStyle(fontSize: 32)),
       ),
     );
   }
