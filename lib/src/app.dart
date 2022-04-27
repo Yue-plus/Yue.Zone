@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:yue_zone/src/login/login_view.dart';
 import 'package:yue_zone/src/setting/settings_controller.dart';
 import 'package:yue_zone/src/setting/settings_view.dart';
@@ -11,27 +13,27 @@ class YueZoneApp extends StatelessWidget {
 
   final SettingsController settingsController;
 
-  static const title = 'YueZone - 悦域';
-
   Widget _home(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(title),
+        title: Text(l10n.title),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            tooltip: '设置',
+            tooltip: l10n.settings,
             onPressed: () => Navigator.pushNamed(context, '/settings'),
           ),
           IconButton(
             icon: const Icon(Icons.login),
-            tooltip: '登入',
+            tooltip: l10n.login,
             onPressed: () => Navigator.pushNamed(context, '/login'),
           ),
         ],
       ),
-      body: const Center(
-        child: Text('// TODO 生成世界……', style: TextStyle(fontSize: 32)),
+      body: Center(
+        child: Text(l10n.welcome_message, style: const TextStyle(fontSize: 32)),
       ),
     );
   }
@@ -48,7 +50,9 @@ class YueZoneApp extends StatelessWidget {
         return MaterialApp(
           // 用于在用户离开或在后台被杀死后，再返回应用时恢复路由堆栈。
           restorationScopeId: 'YueZoneApp',
-          title: title,
+          title: 'YueZone - 悦域',
+          onGenerateTitle: (BuildContext context) =>
+              AppLocalizations.of(context)!.title,
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
@@ -60,14 +64,18 @@ class YueZoneApp extends StatelessWidget {
             '/login': (context) => const LoginView(),
             '/signup': (context) => const SignupView(),
           },
+          locale: settingsController.locale,
           localizationsDelegates: const [
             // 本地化的代理类
+            AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
-            // 本应用并不使用 Cupertino 设计
-            // GlobalCupertinoLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [Locale('zh')],
+          supportedLocales: const [
+            Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+            Locale('en', ''),
+          ],
           debugShowCheckedModeBanner: false,
         );
       },

@@ -1,0 +1,14 @@
+{
+  "title": "YueZone",
+  "settings": "Settings",
+  "login": "Login",
+  "welcome_message": "// TODO Generative world...",
+  "follow_system": "Follow system",
+  "theme": "Theme",
+  "theme_configuration": "Theme configuration",
+  "dark_theme": "Dark Theme",
+  "light_theme": "Light Theme",
+  "language": "Language",
+  "language_configuration": "Language configuration",
+  "account": "Account"
+}

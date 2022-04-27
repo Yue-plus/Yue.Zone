@@ -1,0 +1,10 @@
+# 该文件用于配置本地化工具；
+
+# 指定输入文件在 `${FLUTTER_PROJECT}/lib/l10n` 中；
+arb-dir: lib/l10n
+
+# `app_zh.arb` 文件提供模板；
+template-arb-file: app_zh.arb
+
+# 生成的本地化文件在 `app_localizations.dart` 文件中；
+output-localization-file: app_localizations.dart

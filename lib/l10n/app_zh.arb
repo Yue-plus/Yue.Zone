@@ -1,0 +1,14 @@
+{
+  "title": "悦域",
+  "settings": "设置",
+  "login": "登入",
+  "welcome_message": "// TODO 生成世界……",
+  "follow_system": "跟随系统",
+  "theme": "主题",
+  "theme_configuration": "主题配置",
+  "dark_theme": "深色主题",
+  "light_theme": "浅色主题",
+  "language": "语言",
+  "language_configuration": "语言配置",
+  "account": "账户"
+}
