@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:yue_zone/src/login/login_view.dart';
 import 'package:yue_zone/src/setting/settings_controller.dart';
@@ -12,6 +13,11 @@ class YueZoneApp extends StatelessWidget {
       : super(key: key);
 
   final SettingsController settingsController;
+
+  /// YuePlus 的头像图片
+  static final yuePlusAvatar = ClipOval(
+    child: Image.network('https://avatars.githubusercontent.com/u/33195150'),
+  );
 
   Widget _home(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -33,7 +39,25 @@ class YueZoneApp extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text(l10n.welcome_message, style: const TextStyle(fontSize: 32)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(l10n.welcome_message, style: const TextStyle(fontSize: 32)),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: 380,
+              child: ListTile(
+                leading: yuePlusAvatar,
+                title: const Text('YuePlus'),
+                subtitle: const Text('🕊🕊🕊 正在开发中……'),
+                trailing: const Icon(Icons.arrow_right),
+                onTap: () {
+                  launchUrl(Uri.parse('https://github.com/Yue-plus/Yue.Zone'));
+                }
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
