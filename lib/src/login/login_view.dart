@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
 
+  /// /#/login
   static const routeName = '/login';
 
   @override

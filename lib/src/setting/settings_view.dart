@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:yue_zone/src/profile/profile_view.dart';
+import 'package:yue_zone/src/setting/account/account_view.dart';
 
 import 'package:yue_zone/src/setting/settings_controller.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key, required this.controller}) : super(key: key);
 
+  /// /#/settings
   static const routeName = '/settings';
 
   final SettingsController controller;
@@ -119,8 +122,8 @@ class SettingsView extends StatelessWidget {
               title: Text(l10n.account),
               subtitle: const Text('Yue_plus@foxmail.com'),
               trailing: const Icon(Icons.arrow_right),
-              enabled: false,
-              onTap: () {},
+              // enabled: false,
+              onTap: () => Navigator.pushNamed(context, AccountView.routeName),
             ),
             const Text('YueZone - 悦域 v0.0.0', textAlign: TextAlign.center),
           ]),

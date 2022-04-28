@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:yue_zone/src/login/login_view.dart';
+import 'package:yue_zone/src/profile/profile_view.dart';
+import 'package:yue_zone/src/setting/account/account_view.dart';
 import 'package:yue_zone/src/setting/settings_controller.dart';
 import 'package:yue_zone/src/setting/settings_view.dart';
 import 'package:yue_zone/src/signup/signup_view.dart';
@@ -13,6 +15,9 @@ class YueZoneApp extends StatelessWidget {
       : super(key: key);
 
   final SettingsController settingsController;
+
+  /// /#/
+  static const routeName = '/';
 
   /// YuePlus 的头像图片
   static final yuePlusAvatar = ClipOval(
@@ -29,12 +34,13 @@ class YueZoneApp extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.settings),
             tooltip: l10n.settings,
-            onPressed: () => Navigator.pushNamed(context, '/settings'),
+            onPressed: () =>
+                Navigator.pushNamed(context, SettingsView.routeName),
           ),
           IconButton(
             icon: const Icon(Icons.login),
             tooltip: l10n.login,
-            onPressed: () => Navigator.pushNamed(context, '/login'),
+            onPressed: () => Navigator.pushNamed(context, LoginView.routeName),
           ),
         ],
       ),
@@ -80,13 +86,15 @@ class YueZoneApp extends StatelessWidget {
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
-          initialRoute: '/',
+          initialRoute: YueZoneApp.routeName,
           routes: {
-            '/': (context) => _home(context),
-            '/settings': (context) =>
+            YueZoneApp.routeName: (context) => _home(context),
+            SettingsView.routeName: (context) =>
                 SettingsView(controller: settingsController),
-            '/login': (context) => const LoginView(),
-            '/signup': (context) => const SignupView(),
+            LoginView.routeName: (context) => const LoginView(),
+            SignupView.routeName: (context) => const SignupView(),
+            AccountView.routeName: (context) => const AccountView(),
+            ProfileView.routeName: (context) => const ProfileView(),
           },
           locale: settingsController.locale,
           localizationsDelegates: const [
