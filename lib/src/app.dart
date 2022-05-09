@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'package:yue_zone/src/login/login_view.dart';
 import 'package:yue_zone/src/profile/profile_view.dart';
@@ -57,9 +56,8 @@ class YueZoneApp extends StatelessWidget {
                 title: const Text('YuePlus'),
                 subtitle: const Text('🕊🕊🕊 正在开发中……'),
                 trailing: const Icon(Icons.arrow_right),
-                onTap: () {
-                  launchUrl(Uri.parse('https://github.com/Yue-plus/Yue.Zone'));
-                }
+                onTap: () =>
+                    Navigator.pushNamed(context, ProfileView.routeName),
               ),
             ),
           ],
@@ -94,7 +92,7 @@ class YueZoneApp extends StatelessWidget {
             LoginView.routeName: (context) => const LoginView(),
             SignupView.routeName: (context) => const SignupView(),
             AccountView.routeName: (context) => const AccountView(),
-            ProfileView.routeName: (context) => const ProfileView(),
+            ProfileView.routeName: (context) => ProfileView(),
           },
           locale: settingsController.locale,
           localizationsDelegates: const [
