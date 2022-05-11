@@ -9,6 +9,9 @@ import 'package:yue_zone/src/setting/settings_controller.dart';
 import 'package:yue_zone/src/setting/settings_view.dart';
 import 'package:yue_zone/src/signup/signup_view.dart';
 
+/// 屏幕尺寸：电脑、平板、手机
+enum ScreenSize {desktop, tab, phone}
+
 class YueZoneApp extends StatelessWidget {
   const YueZoneApp({Key? key, required this.settingsController})
       : super(key: key);
@@ -22,6 +25,15 @@ class YueZoneApp extends StatelessWidget {
   static final yuePlusAvatar = ClipOval(
     child: Image.network('https://avatars.githubusercontent.com/u/33195150'),
   );
+
+  /// 获取屏幕尺寸
+  static ScreenSize getScreenSize(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    if (screenWidth > 1600.0) return ScreenSize.desktop;
+    if (screenWidth > 800.0) return ScreenSize.tab;
+    return ScreenSize.phone;
+  }
 
   Widget _home(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;

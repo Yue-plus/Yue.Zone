@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yue_zone/src/app.dart';
 
 class ProfileView extends StatelessWidget {
   ProfileView({Key? key}) : super(key: key);
@@ -6,8 +7,9 @@ class ProfileView extends StatelessWidget {
   /// /#/profile
   static const routeName = '/Yue_plus';
 
-  double _userInfoWidth = 600.0;
-  double _fontSize = 32.0;
+  late double _userInfoWidth;
+  late double _fontSize;
+  late ScreenSize screenSize;
 
   Widget _userInfo() {
     return Center(
@@ -29,34 +31,34 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    Widget buildBody = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(width: _userInfoWidth, child: _userInfo()),
-        Expanded(child: _userActivity()),
-      ],
-    );
+    screenSize = YueZoneApp.getScreenSize(context);
 
-    if (screenWidth > 1600) {
+    if (screenSize == ScreenSize.desktop) {
       _userInfoWidth = 600;
       _fontSize = 32;
-    } else if (screenWidth > 800) {
+    }
+
+    if (screenSize == ScreenSize.tab) {
       _userInfoWidth = 300;
       _fontSize = 23;
-    } else {
-      _fontSize = 18;
-      buildBody = Column(
-        children: [
-          _userInfo(),
-          Expanded(child: _userActivity()),
-        ],
-      );
+    }
+
+    if (screenSize == ScreenSize.phone) {
+      _userInfoWidth = double.infinity;
+      _fontSize = 23;
     }
 
     return Scaffold(
-        appBar: AppBar(title: const Text('Yue_plus')),
-        body: buildBody,
+      appBar: AppBar(title: const Text('Yue_plus')),
+      body: Flex(
+        direction:
+            // Vertical: 垂直的； Horizontal: 水平的；
+            screenSize == ScreenSize.phone ? Axis.vertical : Axis.horizontal,
+        children: [
+          SizedBox(width: _userInfoWidth, child: _userInfo()),
+          Expanded(child: _userActivity()),
+        ],
+      ),
     );
   }
 }
